@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import React,{ useState, useEffect } from 'react';
 import Botao from './Botao';
 
@@ -19,21 +19,26 @@ export default function App() {
     numeros.push(i);
   }
 
-  return (
-    <View style={{flex:1}}>
-      <View style={styles.topo}><Text style={{fontSize:24}}>{stringCalculo}</Text></View>
+  function logicaCalculadora(){
+    //logica da calculadora
+  }
 
-      <View style={{flex:1,flexDirection:'row'}}>
-        <TouchableHighlight style={{width:'25%'}}><Text style={{fontSize:24,textAlign:'center'}}>+</Text></TouchableHighlight>
-        <TouchableHighlight style={{width:'25%'}}><Text style={{fontSize:24,textAlign:'center'}}>-</Text></TouchableHighlight>
-        <TouchableHighlight style={{width:'25%'}}><Text style={{fontSize:24,textAlign:'center'}}>/</Text></TouchableHighlight>
-        <TouchableHighlight style={{width:'25%'}}><Text style={{fontSize:24,textAlign:'center'}}>*</Text></TouchableHighlight>
+  return (
+    <View style={{flex:1,backgroundColor:'black'}}>
+      <StatusBar hidden />
+      <View style={styles.topo}><Text style={{fontSize:24,color:'white'}}>{stringCalculo}</Text></View>
+
+      <View style={{flexDirection:'row',height:'16.6%',alignItems:'center'}}>
+        <TouchableOpacity style={{width:'25%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>+</Text></TouchableOpacity>
+        <TouchableOpacity style={{width:'25%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>-</Text></TouchableOpacity>
+        <TouchableOpacity style={{width:'25%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>/</Text></TouchableOpacity>
+        <TouchableOpacity style={{width:'25%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>*</Text></TouchableOpacity>
       </View>
 
-      <View>
+      <View style={{flexDirection:'row',flexWrap:'wrap',borderTopColor:'black',borderTopWidth:2,height:'66.8%'}}>
         {
           numeros.map(function(e){
-            return(<Botao numero={e}></Botao>)
+            return(<Botao logicaCalculadora={logicaCalculadora} numero={e}></Botao>)
           })
         }
       </View>
@@ -44,7 +49,9 @@ export default function App() {
 const styles = StyleSheet.create({
   topo: {
     padding:10,
-    borderBottomColor:'black',
-    borderBottomWidth:2
+    backgroundColor:'rgb(20,20,20)',
+    height:'16.6%',
+    justifyContent:'center',
+    paddingLeft:20
   }
 });
