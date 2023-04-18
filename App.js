@@ -34,6 +34,26 @@ export default function App() {
       setSecondNumber(parseInt(secondNumber.toString() + n.toString()));
       setStringCalculo(firstNumber+sinal+parseInt(secondNumber.toString() + n.toString()));
     }
+
+    if(n == "="){
+      let resultado = 0;
+      if(sinal == "+"){
+        resultado = firstNumber+secondNumber;
+      }
+      else if(sinal == "-"){
+        resultado = firstNumber-secondNumber;
+      }
+      else if(sinal == "/"){
+        resultado = firstNumber/secondNumber;
+      }
+      else if(sinal == "*"){
+        resultado = firstNumber*secondNumber;
+      }
+      setStringCalculo(resultado);
+      setSinal("");
+      setFirstNumber(resultado);
+      setSecondNumber(0);
+    }
   }
 
   return (
