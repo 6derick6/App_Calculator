@@ -8,7 +8,7 @@ export default function App() {
   console.disableYellowBox = true;
 
   const [firstNumber, setFirstNumber] = useState(0);
-  const [secondtNumber, setSecondNumber] = useState(0);
+  const [secondNumber, setSecondNumber] = useState(0);
   const [sinal, setSinal] = useState("");
 
   const [stringCalculo, setStringCalculo] = useState(0);
@@ -19,8 +19,21 @@ export default function App() {
     numeros.push(i);
   }
 
-  function logicaCalculadora(){
-    //logica da calculadora
+  function logicaCalculadora(n){
+    if(sinal == ""){
+      setFirstNumber(parseInt(firstNumber.toString() + n.toString()));
+      setStringCalculo(parseInt(firstNumber.toString() + n.toString()));
+    }
+
+    if((n == "/" || n == "*" || n == "+" || n == "-") && secondNumber == 0){
+      setStringCalculo(firstNumber.toString() + n);
+      setSinal(n);
+    }
+
+    if(sinal != ""){
+      setSecondNumber(parseInt(secondNumber.toString() + n.toString()));
+      setStringCalculo(firstNumber+sinal+parseInt(secondNumber.toString() + n.toString()));
+    }
   }
 
   return (
@@ -29,10 +42,11 @@ export default function App() {
       <View style={styles.topo}><Text style={{fontSize:24,color:'white'}}>{stringCalculo}</Text></View>
 
       <View style={{flexDirection:'row',height:'16.6%',alignItems:'center'}}>
-        <TouchableOpacity style={{width:'25%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>+</Text></TouchableOpacity>
-        <TouchableOpacity style={{width:'25%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>-</Text></TouchableOpacity>
-        <TouchableOpacity style={{width:'25%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>/</Text></TouchableOpacity>
-        <TouchableOpacity style={{width:'25%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>*</Text></TouchableOpacity>
+        <TouchableOpacity onPress={()=>logicaCalculadora('+')} style={{width:'20%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>+</Text></TouchableOpacity>
+        <TouchableOpacity onPress={()=>logicaCalculadora('-')} style={{width:'20%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>-</Text></TouchableOpacity>
+        <TouchableOpacity onPress={()=>logicaCalculadora('/')} style={{width:'20%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>/</Text></TouchableOpacity>
+        <TouchableOpacity onPress={()=>logicaCalculadora('*')} style={{width:'20%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>*</Text></TouchableOpacity>
+        <TouchableOpacity onPress={()=>logicaCalculadora('=')} style={{width:'20%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>=</Text></TouchableOpacity>
       </View>
 
       <View style={{flexDirection:'row',flexWrap:'wrap',borderTopColor:'black',borderTopWidth:2,height:'66.8%'}}>
