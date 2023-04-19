@@ -56,6 +56,13 @@ export default function App() {
     }
   }
 
+  function resetaCalculadora(){
+      setStringCalculo(0);
+      setSinal("");
+      setFirstNumber(0);
+      setSecondNumber(0);
+  }
+
   return (
     <View style={{flex:1,backgroundColor:'black'}}>
       <StatusBar hidden />
@@ -69,7 +76,11 @@ export default function App() {
         <TouchableOpacity onPress={()=>logicaCalculadora('=')} style={{width:'20%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>=</Text></TouchableOpacity>
       </View>
 
-      <View style={{flexDirection:'row',flexWrap:'wrap',borderTopColor:'black',borderTopWidth:2,height:'66.8%'}}>
+      <View style={{flexDirection:'row',height:'10%',alignItems:'center'}}>
+        <TouchableOpacity onPress={()=>resetaCalculadora()} style={{width:'100%',backgroundColor:'rgb(20,20,20)',justifyContent:'center',alignItems:'center',height:'100%'}}><Text style={{fontSize:24,textAlign:'center',color:'white'}}>Resetar</Text></TouchableOpacity>
+      </View>
+
+      <View style={{flexDirection:'row',flexWrap:'wrap',borderTopColor:'black',borderTopWidth:2,height:'56.8%'}}>
         {
           numeros.map(function(e){
             return(<Botao logicaCalculadora={logicaCalculadora} numero={e}></Botao>)
